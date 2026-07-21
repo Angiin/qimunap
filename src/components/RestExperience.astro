@@ -1,0 +1,138 @@
+---
+// 可交互「憩屏体验」：预告横幅 → 立即憩目 → 全屏小憩遮罩（20 秒倒计时 + 轻声提示音）。
+// 由任意带 data-rest-trigger 的按钮触发（见 RestSection）。
+---
+
+<!-- 预告横幅 -->
+<div
+  id="qx-banner"
+  class="fixed inset-0 z-[100] items-end justify-center p-10"
+  style="display:none;background:rgba(15,25,20,.45);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);"
+>
+  <div
+    class="w-[min(440px,94%)] rounded-2xl bg-white px-5 py-[18px] shadow-[0_30px_70px_-18px_rgba(0,0,0,.5)]"
+    style="animation:bnrIn .28s ease;"
+  >
+    <div class="flex items-center gap-3">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[11px]" style="background:rgba(127,195,169,.16);">
+        <img src="/assets/icon.svg" width="24" height="24" alt="憩目" />
+      </div>
+      <div class="min-w-0 flex-1">
+        <div class="text-[16px] font-bold text-ink-strong">小憩即将开始</div>
+        <div class="text-[13px] text-muted-3">准备好了就立即憩目</div>
+      </div>
+      <div id="qx-banner-sec" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-[3px] border-brand text-[15px] font-bold text-ink-strong">20</div>
+    </div>
+    <div class="mt-4 flex items-center gap-2.5">
+      <button type="button" data-qx-skip class="rounded-lg border-[1.5px] px-4 py-2.5 text-[14px] font-semibold text-muted-3" style="border-color:rgba(40,60,50,.2);background:transparent;">跳过</button>
+      <div class="flex-1"></div>
+      <button type="button" data-qx-begin class="whitespace-nowrap rounded-lg bg-brand px-5 py-2.5 text-[14px] font-bold text-white">立即憩目</button>
+    </div>
+  </div>
+</div>
+
+<!-- 全屏憩屏（小憩 · 浅色） -->
+<div
+  id="qx-rest"
+  class="fixed inset-0 z-[100] flex-col items-center justify-center p-8"
+  style="display:none;background:radial-gradient(120% 100% at 50% 42%,#eef3ee,#dbe5de);animation:fadeIn .3s ease;"
+>
+  <div class="absolute left-0 right-0 top-[38px] flex items-center justify-center gap-2.5">
+    <img src="/assets/icon.svg" width="26" height="26" alt="憩目" />
+    <span class="whitespace-nowrap text-[19px] font-bold tracking-[.16em] text-ink-strong">憩目</span>
+  </div>
+  <div class="mb-[26px] flex items-center gap-3">
+    <span class="whitespace-nowrap text-[15px] text-muted-3">今日第 18 次</span>
+    <span class="whitespace-nowrap rounded-full border px-[15px] py-[5px] text-[14px] text-ink-strong" style="border-color:rgba(40,60,50,.25);">小憩</span>
+  </div>
+  <div class="relative h-[236px] w-[236px]">
+    <svg width="236" height="236" viewBox="0 0 220 220" class="block">
+      <circle cx="110" cy="110" r="95" fill="none" stroke="#cddbd4" stroke-width="8"></circle>
+      <circle id="qx-ring" cx="110" cy="110" r="95" fill="none" stroke="#2f7d6e" stroke-width="8" stroke-linecap="round" stroke-dasharray="596.9" stroke-dashoffset="0" transform="rotate(-90 110 110)" style="transition:stroke-dashoffset 1s linear;"></circle>
+      <circle cx="164" cy="32" r="9" fill="#ce9c5f"></circle>
+    </svg>
+    <div id="qx-time" class="absolute inset-0 flex items-center justify-center text-[56px] font-bold text-ink-strong">20</div>
+  </div>
+  <div class="mt-8 max-w-[640px] text-center text-[clamp(22px,3vw,30px)] font-bold text-ink-strong">
+    望向窗外，找一处你能看到的最远的地方
+  </div>
+  <button type="button" data-qx-skip class="mt-[30px] whitespace-nowrap rounded-full border px-[26px] py-[11px] text-[15px] font-semibold text-muted-3" style="border-color:rgba(40,60,50,.25);background:transparent;">
+    跳过本次憩目
+  </button>
+</div>
+
+<script>
+  const DUR = 20;
+  const CIRC = 596.9;
+  const banner = document.getElementById("qx-banner") as HTMLElement | null;
+  const rest = document.getElementById("qx-rest") as HTMLElement | null;
+  const ring = document.getElementById("qx-ring");
+  const timeEl = document.getElementById("qx-time");
+  const bannerSec = document.getElementById("qx-banner-sec");
+  let left = DUR;
+  let timer: ReturnType<typeof setInterval> | undefined;
+  let ac: AudioContext | null = null;
+
+  function show(el: HTMLElement | null, on: boolean) { if (el) el.style.display = on ? "flex" : "none"; }
+
+  function chime() {
+    try {
+      const AC = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AC) return;
+      ac = ac || new AC();
+      if (ac.state === "suspended") ac.resume();
+      const t = ac.currentTime;
+      [659, 880].forEach((f, i) => {
+        const o = ac!.createOscillator();
+        const g = ac!.createGain();
+        o.type = "sine";
+        o.frequency.value = f;
+        o.connect(g);
+        g.connect(ac!.destination);
+        const s = t + i * 0.16;
+        g.gain.setValueAtTime(0.0001, s);
+        g.gain.exponentialRampToValueAtTime(0.16, s + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.0008, s + 0.6);
+        o.start(s);
+        o.stop(s + 0.65);
+      });
+    } catch (e) { /* no audio, no problem */ }
+  }
+
+  function openBanner() {
+    clearInterval(timer);
+    if (bannerSec) bannerSec.textContent = String(DUR);
+    show(rest, false);
+    show(banner, true);
+  }
+  function closeAll() {
+    clearInterval(timer);
+    show(banner, false);
+    show(rest, false);
+  }
+  function beginRest() {
+    chime();
+    clearInterval(timer);
+    left = DUR;
+    if (timeEl) timeEl.textContent = String(left);
+    if (ring) ring.setAttribute("stroke-dashoffset", "0");
+    show(banner, false);
+    show(rest, true);
+    timer = setInterval(() => {
+      left--;
+      if (left <= 0) {
+        clearInterval(timer);
+        chime();
+        show(rest, false);
+        return;
+      }
+      if (timeEl) timeEl.textContent = String(left);
+      if (ring) ring.setAttribute("stroke-dashoffset", String(CIRC * (1 - left / DUR)));
+    }, 1000);
+  }
+
+  document.querySelectorAll("[data-rest-trigger]").forEach((b) => b.addEventListener("click", openBanner));
+  document.querySelectorAll("[data-qx-skip]").forEach((b) => b.addEventListener("click", closeAll));
+  document.querySelectorAll("[data-qx-begin]").forEach((b) => b.addEventListener("click", beginRest));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAll(); });
+</script>

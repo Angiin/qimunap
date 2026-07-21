@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import DemoSlider from "../components/DemoSlider.astro";
+import RestSection from "../components/RestSection.astro";
+import SmartSection from "../components/SmartSection.astro";
+import Privacy from "../components/Privacy.astro";
+import Footer from "../components/Footer.astro";
+import RestExperience from "../components/RestExperience.astro";
+---
+
+<Layout>
+  <div id="top">
+    <Header />
+    <main>
+      <Hero />
+      <DemoSlider />
+      <RestSection />
+      <SmartSection />
+      <Privacy />
+    </main>
+    <Footer />
+  </div>
+  <RestExperience />
+</Layout>

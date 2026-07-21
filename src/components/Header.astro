@@ -1,0 +1,31 @@
+---
+import { storeUrl } from "../site";
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-[#283c32]/[0.08] bg-[#f3f6ee]/80 backdrop-blur-[14px]"
+>
+  <nav
+    class="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-5 px-8 py-3.5"
+  >
+    <a href="#top" class="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-ink">
+      <img src="/assets/icon.svg" alt="憩目" width="30" height="30" class="block" />
+      <span class="text-[22px] font-bold tracking-[0.03em]">憩目</span>
+    </a>
+    <div
+      class="flex flex-wrap items-center gap-[30px] text-[15px] font-medium text-body-3 max-md:hidden"
+    >
+      <a href="#demo" class="whitespace-nowrap transition-colors hover:text-brand">在线体验</a>
+      <a href="#rest" class="whitespace-nowrap transition-colors hover:text-brand">憩屏</a>
+      <a href="#smart" class="whitespace-nowrap transition-colors hover:text-brand">智能憩目</a>
+      <a href="#privacy" class="whitespace-nowrap transition-colors hover:text-brand">隐私</a>
+    </div>
+    <a
+      href={storeUrl}
+      target="_blank"
+      rel="noopener"
+      class="inline-flex items-center gap-2 whitespace-nowrap rounded-[10px] bg-brand px-[22px] py-[11px] text-[15px] font-semibold text-white shadow-[0_10px_24px_-12px_rgba(47,125,110,.7)] transition-colors hover:bg-brand-dark"
+      >免费下载</a
+    >
+  </nav>
+</header>

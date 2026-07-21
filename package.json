@@ -1,0 +1,18 @@
+{
+  "name": "qimunap",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "憩目 Qimu · 官网 — 让眼睛，休憩片刻",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.6.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0"
+  }
+}

@@ -1,0 +1,41 @@
+---
+const features = [
+  "全屏免打扰：视频 · 演示 · 游戏",
+  "会议 / 通话免打扰：麦克风占用时不弹出",
+  "多屏憩屏：所有屏幕，或仅主屏",
+];
+---
+
+<section id="smart" class="bg-section px-8 py-[clamp(44px,5.5vw,80px)]">
+  <div
+    class="mx-auto grid max-w-[1200px] items-center gap-[clamp(40px,5vw,72px)]"
+    style="grid-template-columns:repeat(auto-fit,minmax(400px,1fr))"
+  >
+    <div
+      class="overflow-hidden rounded-2xl border border-[#283c32]/[0.08] shadow-[0_40px_84px_-34px_rgba(20,35,28,.5)]"
+    >
+      <img src="/assets/smart-light.png" alt="憩目 智能憩目设置：全屏与会议免打扰" class="block w-full" />
+    </div>
+    <div>
+      <div class="text-[19px] font-bold tracking-[.02em] text-brand">智能憩目</div>
+      <h2
+        class="mt-3 text-[clamp(26px,3.2vw,38px)] font-bold leading-[1.16] tracking-[-0.005em] text-ink-strong"
+      >
+        只在该休息时出现
+      </h2>
+      <p class="mt-4 text-[clamp(16px,1.4vw,19px)] leading-[1.75] text-body-2">
+        看视频、做演示、玩游戏时，全屏免打扰会让憩屏安静退场；检测到麦克风正在使用，会议 / 通话免打扰也不会打断你。多显示器时，可以盖住所有屏幕，或只在主屏休息。
+      </p>
+      <ul class="mt-6 flex list-none flex-col gap-[13px] p-0">
+        {
+          features.map((f) => (
+            <li class="flex items-start gap-3 text-[16.5px] text-body-3">
+              <span class="mt-px shrink-0 font-bold text-brand">✓</span>
+              {f}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

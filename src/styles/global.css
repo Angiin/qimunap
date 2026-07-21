@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* 憩目官网 · 设计 tokens（取自 憩目官网.dc.html） */
+@theme {
+  --font-sans: "Noto Sans", "Noto Sans SC", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --color-bg: #f6f7f0;
+  --color-section: #ecf1e7;
+  --color-demo: #ecf1e7;
+
+  --color-ink: #23302b;
+  --color-ink-strong: #1e2b26;
+  --color-body: #46554c;
+  --color-body-2: #4a574f;
+  --color-body-3: #3c4a43;
+  --color-muted: #54615a;
+  --color-muted-2: #5b6a61;
+  --color-muted-3: #7a887f;
+  --color-eyebrow: #8a988f;
+
+  --color-brand: #2f7d6e;
+  --color-brand-dark: #276757;
+  --color-brand-soft: #7fc3a9;
+  --color-amber: #ce9c5f;
+
+  --color-hero-1: #edf3e9;
+  --color-hero-2: #dee9d8;
+  --color-hero-3: #cfdcc9;
+
+  --color-pro-dark: #1b332c;
+  --color-pro-amber: #e4b071;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: #cfe0d9;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes bnrIn {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-floaty { animation: floaty 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-floaty { animation: none; }
+}

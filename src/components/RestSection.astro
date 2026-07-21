@@ -1,0 +1,77 @@
+---
+// 「两种节奏」——憩屏浅/深切换 + 「试一次小憩」触发可交互憩屏
+---
+
+<section id="rest" class="bg-bg px-8 py-[clamp(44px,5.5vw,80px)]">
+  <div
+    class="mx-auto grid max-w-[1200px] items-center gap-[clamp(40px,5vw,72px)]"
+    style="grid-template-columns:repeat(auto-fit,minmax(400px,1fr))"
+  >
+    <div>
+      <div class="text-[19px] font-bold tracking-[.02em] text-brand">憩屏 · 小憩与长憩</div>
+      <h2
+        class="mt-3 text-[clamp(26px,3.2vw,38px)] font-bold leading-[1.16] tracking-[-0.005em] text-ink-strong"
+      >
+        两种节奏，刚刚好
+      </h2>
+      <p class="mt-4 text-[clamp(16px,1.4vw,19px)] leading-[1.75] text-body-2">
+        小憩只要 20 秒，望向窗外、眨眨眼；长憩会带你走几步简单的放松——闭上眼睛、深呼吸、起身走动。每一次都有轻声的引导，随时可以「跳过本次憩目」。憩屏支持浅色与深色，跟随系统自然切换。
+      </p>
+      <div class="mt-[26px] flex max-w-[380px] gap-1 rounded-[10px] bg-[#e1e9de] p-1">
+        <button type="button" data-rest-toggle="short" class="rest-seg" aria-pressed="true">小憩 · 浅色</button>
+        <button type="button" data-rest-toggle="long" class="rest-seg" aria-pressed="false">长憩 · 深色</button>
+      </div>
+      <p class="mt-3.5 text-[13.5px] text-muted-3">↔ 点一下，切换浅色 / 深色憩屏</p>
+      <button
+        type="button"
+        data-rest-trigger
+        class="mt-6 inline-flex items-center gap-2 rounded-[10px] bg-brand px-[22px] py-3 text-[15px] font-semibold text-white shadow-[0_10px_24px_-12px_rgba(47,125,110,.7)] transition-colors hover:bg-brand-dark"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+        试一次小憩（20 秒）
+      </button>
+    </div>
+    <div
+      class="overflow-hidden rounded-2xl border border-[#283c32]/[0.08] shadow-[0_40px_84px_-34px_rgba(20,35,28,.55)]"
+    >
+      <img id="restImg" src="/assets/rest-light.png" alt="憩目 憩屏画面" class="block w-full" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .rest-seg {
+    flex: 1;
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #607068;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.15s;
+  }
+  .rest-seg[aria-pressed="true"] {
+    background: #fff;
+    color: #1e2b26;
+    font-weight: 700;
+    box-shadow: 0 2px 8px -3px rgba(30, 45, 38, 0.3);
+  }
+</style>
+
+<script>
+  let rest = "short";
+  const img = document.getElementById("restImg") as HTMLImageElement | null;
+  function sync() {
+    if (img) img.src = rest === "short" ? "/assets/rest-light.png" : "/assets/rest-dark.png";
+    document
+      .querySelectorAll<HTMLElement>("[data-rest-toggle]")
+      .forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.restToggle === rest)));
+  }
+  document.querySelectorAll<HTMLElement>("[data-rest-toggle]").forEach((b) =>
+    b.addEventListener("click", () => { rest = b.dataset.restToggle!; sync(); })
+  );
+  sync();
+</script>

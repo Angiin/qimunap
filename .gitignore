@@ -1,0 +1,17 @@
+# build output
+dist/
+# generated types
+.astro/
+# deps
+node_modules/
+# env
+.env
+.env.production
+# os
+.DS_Store
+Thumbs.db
+# logs
+npm-debug.log*
+# 顶层源截图与旧 demo（工作文件，非站点源；站点用图已复制进 public/）
+/assets/
+/experience/

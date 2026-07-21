@@ -1,0 +1,46 @@
+---
+import { storeUrl, feedbackEmail, icpText } from "../site";
+---
+
+<footer class="border-t border-[#283c32]/[0.08] bg-section px-8 pb-10 pt-14">
+  <div
+    class="mx-auto flex max-w-[1100px] flex-wrap items-start justify-between gap-8"
+  >
+    <div class="max-w-[280px]">
+      <div class="flex items-center gap-2.5">
+        <img src="/assets/icon.svg" alt="憩目" width="28" height="28" class="block" />
+        <span class="text-[20px] font-bold tracking-[.03em] text-ink-strong">憩目</span>
+      </div>
+      <p class="mt-3.5 text-[14.5px] leading-[1.7] text-muted-2">
+        让眼睛，休憩片刻。一款温柔的护眼休息提醒。
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-14">
+      <div class="flex flex-col gap-3">
+        <div class="text-[13px] font-bold uppercase tracking-[.08em] text-eyebrow">产品</div>
+        <a href="#demo" class="text-[15px] text-body-3 transition-colors hover:text-brand">应用一览</a>
+        <a href="#rest" class="text-[15px] text-body-3 transition-colors hover:text-brand">憩屏</a>
+        <a href="#smart" class="text-[15px] text-body-3 transition-colors hover:text-brand">智能憩目</a>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="text-[13px] font-bold uppercase tracking-[.08em] text-eyebrow">更多</div>
+        <a
+          href={storeUrl}
+          target="_blank"
+          rel="noopener"
+          class="text-[15px] text-body-3 transition-colors hover:text-brand">Microsoft Store</a
+        >
+        <a
+          href={`mailto:${feedbackEmail}`}
+          class="text-[15px] text-body-3 transition-colors hover:text-brand">反馈建议</a
+        >
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-10 flex max-w-[1100px] flex-wrap justify-between gap-3 border-t border-[#283c32]/10 pt-6 text-[13.5px] text-muted-3"
+  >
+    <span>© 2026 憩目 Qimu · 让眼睛，休憩片刻</span>
+    <span>{icpText}</span>
+  </div>
+</footer>

@@ -1,0 +1,50 @@
+---
+const points = [
+  { t: "无遥测", d: "不上报使用行为，没有埋点，没有第三方分析。" },
+  { t: "数据只留在本机", d: "用眼记录、统计、设置都存在你自己的电脑上。" },
+  { t: "不联网", d: "仅在购买与授权校验时连接 Microsoft Store，其余全程离线。" },
+];
+---
+
+<section id="privacy" class="bg-bg px-8 py-[clamp(44px,5.5vw,80px)]">
+  <div class="mx-auto max-w-[1000px] text-center">
+    <div
+      class="text-[13.5px] font-bold uppercase tracking-[.1em] text-eyebrow"
+    >
+      隐私
+    </div>
+    <h2
+      class="mt-2 text-[clamp(26px,3.2vw,38px)] font-bold leading-[1.16] tracking-[-0.005em] text-ink-strong"
+    >
+      你的用眼数据，只属于你
+    </h2>
+    <p class="mx-auto mt-3 max-w-[560px] text-[15.5px] leading-[1.7] text-muted">
+      护眼不该以隐私为代价。憩目把一切都留在本机——不收集、不上传、不分析。
+    </p>
+    <div class="mt-10 grid gap-5" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      {
+        points.map((p) => (
+          <div class="rounded-2xl border border-[#283c32]/10 bg-white/70 px-7 py-8 text-left">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand/[0.12] text-brand">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div class="mt-4 text-[17px] font-bold text-ink-strong">{p.t}</div>
+            <p class="mt-2 text-[14.5px] leading-[1.65] text-muted">{p.d}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -2,5 +2,6 @@
 export const storeUrl = "https://apps.microsoft.com/detail/9N5V74X94TC3";
 export const storeId = "9N5V74X94TC3";
 export const feedbackEmail = "qimuapp@outlook.com";
+export const price = "¥18"; // TODO: 确认 Pro 真实价格（这是设计稿里的占位）
 export const brand = "憩目";
 export const tagline = "让眼睛，休憩片刻";

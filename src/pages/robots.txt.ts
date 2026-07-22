@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 
 // robots.txt —— 放行所有爬虫 + 显式放行主流 AI / 生成式引擎（GEO）。Sitemap 从 astro.config 的 site 取。
 export const GET: APIRoute = ({ site }) => {
-  const base = site?.href ?? "https://qimunap.pages.dev/";
+  const base = site?.href ?? "https://qimuapp.pages.dev/";
   const aiBots = [
     "GPTBot",
     "OAI-SearchBot",

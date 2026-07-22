@@ -1,5 +1,5 @@
 ---
-import { storeUrl } from "../site";
+import { storeUrl, storeId, wingetCmd } from "../site";
 ---
 
 <section
@@ -38,6 +38,30 @@ import { storeUrl } from "../site";
           >在线体验一下</a
         >
       </div>
+      <div class="mt-[18px] max-w-[520px]">
+        <div class="mb-2 text-[13px] font-semibold text-muted-2">
+          习惯命令行？用 <span class="text-brand">winget</span> 一键装：
+        </div>
+        <div
+          class="flex items-center gap-2 rounded-[11px] border border-[#283c32]/10 bg-pro-dark py-2.5 pr-2.5 pl-3.5 shadow-[0_16px_40px_-26px_rgba(27,51,44,.9)]"
+        >
+          <span class="select-none font-mono text-[15px] leading-none text-brand-soft" aria-hidden="true"
+            >$</span
+          >
+          <code
+            class="no-scrollbar min-w-0 flex-1 overflow-x-auto whitespace-nowrap py-0.5 font-mono text-[13.5px] leading-[1.5] text-hero-1"
+            >winget install --source msstore {storeId}</code
+          >
+          <button
+            type="button"
+            data-copy={wingetCmd}
+            aria-label="复制 winget 安装命令"
+            class="shrink-0 rounded-[7px] bg-white/10 px-3 py-2 text-[13px] font-semibold text-hero-1 transition-colors hover:bg-white/20"
+          >
+            复制
+          </button>
+        </div>
+      </div>
       <div class="mt-[22px] flex flex-wrap items-center gap-[22px]">
         <span
           class="inline-flex items-center gap-[7px] whitespace-nowrap text-[14px] font-semibold text-muted-2"
@@ -71,3 +95,28 @@ import { storeUrl } from "../site";
     </div>
   </div>
 </section>
+
+<script>
+  for (const btn of document.querySelectorAll<HTMLButtonElement>("[data-copy]")) {
+    btn.addEventListener("click", async () => {
+      const text = btn.dataset.copy ?? "";
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      const prev = btn.textContent;
+      btn.textContent = "已复制";
+      window.setTimeout(() => {
+        btn.textContent = prev;
+      }, 1600);
+    });
+  }
+</script>

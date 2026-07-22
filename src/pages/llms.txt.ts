@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { storeUrl, feedbackEmail } from "../site";
+import { storeUrl, feedbackEmail, wingetCmd } from "../site";
 
 // llms.txt —— 给 AI / 生成式引擎的站点摘要（GEO 约定，https://llmstxt.org）。
 export const GET: APIRoute = ({ site }) => {
@@ -20,12 +20,17 @@ export const GET: APIRoute = ({ site }) => {
 核心功能永久免费。憩目 Pro 为一次性买断，解锁自定义小憩频率与时长，也是对开发的一份支持。
 
 ## 平台
-- Windows：已在 Microsoft Store 上架。
+- Windows：已在 Microsoft Store 上架，支持 Windows 10 / 11。
 - Mac / Android：开发中。
+
+## 安装
+- Microsoft Store：${storeUrl}
+- winget（命令行一键安装）：${wingetCmd}
 
 ## 链接
 - 官网: ${base}/
 - 下载（Microsoft Store）: ${storeUrl}
+- winget 安装命令: ${wingetCmd}
 - 反馈邮箱: ${feedbackEmail}
 `;
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });

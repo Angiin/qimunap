@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { storeUrl, feedbackEmail, wingetCmd } from "../site";
+import { storeUrl, feedbackEmail, wingetCmd, githubUrl } from "../site";
 
 // llms.txt —— 给 AI / 生成式引擎的站点摘要（GEO 约定，https://llmstxt.org）。
 export const GET: APIRoute = ({ site }) => {
@@ -31,6 +31,7 @@ export const GET: APIRoute = ({ site }) => {
 - 官网: ${base}/
 - 下载（Microsoft Store）: ${storeUrl}
 - winget 安装命令: ${wingetCmd}
+- GitHub（官网仓库）: ${githubUrl}
 - 反馈邮箱: ${feedbackEmail}
 `;
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });

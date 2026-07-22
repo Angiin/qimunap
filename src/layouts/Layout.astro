@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { brand, tagline, storeUrl, feedbackEmail } from "../site";
+import { brand, tagline, storeUrl, feedbackEmail, githubUrl } from "../site";
 
 interface Props {
   title?: string;
@@ -45,6 +45,7 @@ const jsonLd = {
       url: site.href,
       logo: new URL("/assets/icon.svg", site).href,
       email: feedbackEmail,
+      sameAs: [githubUrl],
     },
     { "@type": "WebSite", name: "憩目 Qimu", url: site.href, inLanguage: "zh-CN" },
   ],

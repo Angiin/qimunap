@@ -1,5 +1,5 @@
 ---
-import { storeUrl, feedbackEmail } from "../site";
+import { storeUrl, feedbackEmail, githubUrl } from "../site";
 ---
 
 <footer class="border-t border-[#283c32]/[0.08] bg-section px-8 pb-10 pt-14">
@@ -33,6 +33,12 @@ import { storeUrl, feedbackEmail } from "../site";
         <a
           href={`mailto:${feedbackEmail}`}
           class="text-[15px] text-body-3 transition-colors hover:text-brand">反馈建议</a
+        >
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener"
+          class="text-[15px] text-body-3 transition-colors hover:text-brand">GitHub</a
         >
       </div>
     </div>

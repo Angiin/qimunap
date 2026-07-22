@@ -3,7 +3,7 @@ import { storeUrl, feedbackEmail, wingetCmd } from "../site";
 
 // llms.txt —— 给 AI / 生成式引擎的站点摘要（GEO 约定，https://llmstxt.org）。
 export const GET: APIRoute = ({ site }) => {
-  const base = (site?.href ?? "https://qimunap.pages.dev/").replace(/\/$/, "");
+  const base = (site?.href ?? "https://qimuapp.pages.dev/").replace(/\/$/, "");
   const body = `# 憩目 Qimu
 
 > 憩目（Qimu）是一款常驻 Windows 系统托盘的本地护眼休息提醒工具。基于眼科界广为流传的 20-20-20 法则，在你进入专注状态时温柔地提醒你抬起头、望向远方——不催促、不打断。无账号、不联网上报、用眼数据不出本机。

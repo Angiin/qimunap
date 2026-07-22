@@ -55,7 +55,7 @@ src/
 │  ├─ index.astro       # 首页
 │  ├─ llms.txt.ts       # GEO：给 AI / 生成式引擎的站点摘要（llmstxt.org 约定）
 │  └─ robots.txt.ts     # 放行爬虫 + 显式放行主流 AI 引擎
-├─ components/          # Hero / Pricing / Footer / … 各区块
+├─ components/          # Hero / DemoSlider / Footer / … 各区块
 ├─ layouts/Layout.astro # <head>：SEO / OG / JSON-LD 结构化数据
 ├─ site.ts              # 🔑 站点常量单一数据源（storeUrl / storeId / wingetCmd / 反馈邮箱 …）
 └─ styles/global.css    # Tailwind v4 设计 tokens
@@ -86,7 +86,7 @@ public/                 # 静态资源（截图、图标、og.png、/experience 
 
 - [x] 官网上线（Astro 5 + Tailwind v4）
 - [x] SEO / GEO 优化（robots / llms.txt / JSON-LD / sitemap）
-- [x] 定价区 + `/experience` 交互 demo
+- [x] `/experience` 交互 demo
 - [x] winget 一键安装入口
 - [ ] 用户反馈收集（表单 / issue 集成）
 - [ ] 公开 Roadmap 页面
